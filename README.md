@@ -1,5 +1,8 @@
 # La Ferme des Brebiquettes — Surveillance qualité temps réel (Bloc 3)
 
+**GitHub :** https://github.com/Montabos/brebiquettes-sensor-control  
+**Production :** https://brebiquettes-sensor-control.vercel.app
+
 Pipeline temps réel pour surveiller froid, humidité et affinage. Les capteurs physiques ne sont pas encore connectés : un **simulateur Python** reproduit leurs événements. **Redpanda** gère le flux continu ; **Supabase PostgreSQL** stocke, transforme et expose la donnée au dashboard.
 
 ## Architecture

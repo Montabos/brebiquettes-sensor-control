@@ -1,0 +1,5 @@
+-- Voir migration appliquée sur le projet Supabase "Brebiquettes sensors control"
+-- Tables: dim_zone, dim_sensor, raw_sensor_events, stg_sensor_readings,
+-- fact_sensor_readings, dead_letter_events, fact_quality_alerts,
+-- pipeline_runs, data_quality_results
+-- Vues: mart_live_quality_status, mart_pipeline_health, mart_recent_readings

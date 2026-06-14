@@ -1,20 +1,20 @@
-# Architecture & pipeline — diagrammes détaillés (Bloc 3)
+# Architecture & pipeline (Bloc 3)
 
-> Diagrammes d'architecture (PNG) pour la soutenance. Commencer par la **vue simplifiée**, puis les schémas détaillés si le jury creuse le streaming, la data quality ou le déploiement.
+> Diagrammes d'architecture du pipeline temps réel — ingestion, transformation, chargement, monitoring et data quality.
 
 ---
 
-## Vue simplifiée — à utiliser en soutenance
+## Vue simplifiée
 
 ### A. Le pipeline en 7 étapes
 
-Phrase à dire : *« Les capteurs envoient des mesures en continu. Redpanda reçoit le flux. Un consumer Python valide chaque événement, isole les erreurs, stocke la donnée dans Supabase, et le dashboard Vercel affiche l'état des zones et les alertes. »*
+Les capteurs envoient des mesures en continu. Redpanda reçoit le flux. Un consumer Python valide chaque événement, isole les erreurs, stocke la donnée dans Supabase, et le dashboard Vercel affiche l'état des zones et les alertes.
 
 ![Diagramme a-pipeline-7-etapes](images/architecture-pipeline/a-pipeline-7-etapes.png)
 
-### B. Local vs Cloud — stratégie de démo
+### B. Local vs Cloud — topologie
 
-Phrase à dire : *« Le dashboard et la base sont en production sur Vercel et Supabase. Redpanda et les scripts Python tournent en local pendant la démo, car ce sont des composants de traitement continu, pas une app web. »*
+Le dashboard et la base sont déployés sur Vercel et Supabase. Redpanda et les scripts Python tournent en local pour le développement et les tests du flux continu.
 
 ![Diagramme b-local-vs-cloud](images/architecture-pipeline/b-local-vs-cloud.png)
 
@@ -36,7 +36,7 @@ Phrase à dire : *« Le dashboard et la base sont en production sur Vercel et Su
 | Contrôles qualité ? | `data_quality_results` + tests pytest |
 | KPI dashboard ? | Vues `mart_live_quality_status`, `mart_pipeline_health` |
 | Déploiement dashboard ? | Push GitHub → Vercel auto |
-| Déploiement pipeline streaming ? | Local pour la démo (Redpanda + Python) |
+| Déploiement pipeline streaming ? | Local (Redpanda + Python) ; cloud possible en production |
 
 ---
 
@@ -76,7 +76,7 @@ Phrase à dire : *« Le dashboard et la base sont en production sur Vercel et Su
 
 ---
 
-## 7. Gestion d'erreurs — scénarios de démo
+## 7. Gestion d'erreurs — scénarios couverts
 
 ![Diagramme 07-gestion-erreurs](images/architecture-pipeline/07-gestion-erreurs.png)
 
@@ -109,5 +109,5 @@ Phrase à dire : *« Le dashboard et la base sont en production sur Vercel et Su
 | Consumer | `python/consumer_to_supabase.py` |
 | Redpanda | `docker-compose.yml` |
 | Schéma SQL | `supabase/migrations/001_sensor_pipeline_core.sql` |
-| Dashboard | `app/(dashboard)/*`, `lib/queries.ts` |
+| Dashboard | `app/(dashboard)/*`, `lib/queries-client.ts`, `components/dashboard/*` |
 | Déploiement | GitHub → Vercel (dashboard seul) |

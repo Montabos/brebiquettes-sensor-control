@@ -20,5 +20,6 @@ venv/
 # misc
 .DS_Store
 *.log
+docs/.mermaid-tmp/
 
 .vercel

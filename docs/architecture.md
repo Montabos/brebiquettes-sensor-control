@@ -32,11 +32,11 @@ Dashboard Next.js                      [CLOUD Vercel]
 | Base de données | PostgreSQL via Supabase | Continuité Bloc 2, raw + staging + marts |
 | Dashboard | Next.js sur Vercel | 4 pages métier, déployé en production |
 | Monitoring pipeline | `pipeline_runs` + `dead_letter_events` | Observabilité sans Grafana |
-| Data quality | `data_quality_results` + tests pytest | Contrôles explicites pour le jury |
+| Data quality | `data_quality_results` + tests pytest | Contrôles automatisés et traçables |
 
 ## Déploiement
 
-| Composant | Où en démo / oral |
+| Composant | Environnement |
 |-----------|-------------------|
 | Redpanda + Console | Local (`docker compose up`) |
 | Producer + Consumer | Local (terminaux Python) |
@@ -54,7 +54,7 @@ Trois niveaux logiques dans Supabase :
 
 ## Diagrammes détaillés
 
-Voir [architecture-pipeline.md](./architecture-pipeline.md) pour tous les schémas Mermaid (soutenance, séquence, ER, déploiement, continuité Bloc 1→3).
+Voir [architecture-pipeline.md](./architecture-pipeline.md) pour les diagrammes détaillés (séquence, ER, déploiement, continuité Bloc 1→3).
 
 ## Continuité avec les autres blocs
 
@@ -71,5 +71,5 @@ Voir [architecture-pipeline.md](./architecture-pipeline.md) pour tous les schém
 | Snowflake | Supabase suffit pour le volume et la cohérence projet |
 | Airflow | Consumer continu + contrôles intégrés |
 | Grafana | Dashboard métier + tables monitoring |
-| Redpanda en cloud (démo) | Docker local suffit pour l'oral ; cloud possible en prod |
+| Redpanda en cloud | Docker local suffit pour le développement ; cloud possible en production |
 | Capteurs IoT réels (phase 1) | Simulateur valide l'architecture avant branchement |

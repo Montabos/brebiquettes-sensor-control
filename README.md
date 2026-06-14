@@ -115,10 +115,6 @@ Ouvrir http://localhost:3000/dashboard
 pytest
 ```
 
-## Démonstration vidéo
-
-Voir [docs/demo_script.md](docs/demo_script.md).
-
 ## Continuité avec les blocs précédents
 
 - **Bloc 1** : données critiques (températures, lots, traçabilité)
@@ -129,4 +125,4 @@ Voir [docs/demo_script.md](docs/demo_script.md).
 
 - Capteurs simulés (remplacement direct du producer le jour du branchement réel)
 - Alertes email non branchées (extension possible via Resend comme Bloc 2)
-- Un seul topic Redpanda (suffisant pour la démo)
+- Un seul topic Redpanda (suffisant pour ce périmètre)

@@ -7,18 +7,7 @@ Pipeline temps réel pour surveiller froid, humidité et affinage. Les capteurs 
 
 ## Architecture
 
-```
-Capteurs simulés (producer Python)
-        ↓
-Redpanda — topic sensor_readings
-        ↓
-Consumer Python (validation + dead-letter)
-        ↓
-Supabase PostgreSQL
-  raw → staging → fact + alertes + monitoring
-        ↓
-Dashboard Next.js (Vercel)
-```
+Voir [docs/architecture.md](docs/architecture.md) et [docs/architecture-pipeline.md](docs/architecture-pipeline.md) pour les **diagrammes Mermaid** (pipeline, séquence, ER, déploiement local/cloud, continuité Bloc 1→3).
 
 **Message clé :** on ne rend pas toute la ferme temps réel. On surveille en continu ce qui ne peut pas attendre : température, humidité et qualité.
 

@@ -62,6 +62,12 @@ export interface RecentReading {
   status_level: QualityStatus;
 }
 
+export interface SensorHistoryPoint {
+  event_id: string;
+  value: number;
+  measured_at: string;
+}
+
 export interface DataQualityResult {
   id: string;
   check_name: string;

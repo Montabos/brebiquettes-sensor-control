@@ -17,6 +17,12 @@ export function formatValue(value: number | null | undefined, unit: string) {
   return `${value} ${unit}`;
 }
 
+export function formatThresholdRange(min: number, max: number, unit: string) {
+  if (unit === "celsius") return `${min} – ${max} °C`;
+  if (unit === "percent") return `${min} – ${max} %`;
+  return `${min} – ${max} ${unit}`;
+}
+
 export function formatQualityStatus(status: QualityStatus | string | null | undefined) {
   switch (status) {
     case "ok":

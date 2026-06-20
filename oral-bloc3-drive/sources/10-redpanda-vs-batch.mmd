@@ -1,0 +1,18 @@
+flowchart TB
+    subgraph batch [Bloc 2 batch]
+        CRON["Vercel Cron 2x jour"]
+        EXT["Extract API"]
+        CRON --> EXT
+    end
+
+    subgraph stream [Bloc 3 streaming]
+        RP["Redpanda continu"]
+        CON["Consumer permanent"]
+        RP --> CON
+    end
+
+    Q["Besoin metier?"]
+    Q -->|"historiser traite"| batch
+    Q -->|"alerte frigo immediate"| stream
+
+    NOTE["Batch: simplicite · cout faible\nStream: latence secondes · DLQ"]

@@ -8,7 +8,7 @@ import type {
 } from "./types";
 
 export async function getDashboardData() {
-  const supabase = createServerClient();
+  const supabase = await createServerClient();
 
   const [zones, alerts, readings, pipeline, quality] = await Promise.all([
     supabase.from("mart_live_quality_status").select("*"),
@@ -37,13 +37,13 @@ export async function getDashboardData() {
 }
 
 export async function getZonesData() {
-  const supabase = createServerClient();
+  const supabase = await createServerClient();
   const { data } = await supabase.from("mart_live_quality_status").select("*");
   return (data ?? []) as ZoneStatus[];
 }
 
 export async function getAlertsData() {
-  const supabase = createServerClient();
+  const supabase = await createServerClient();
   const { data } = await supabase
     .from("fact_quality_alerts")
     .select("*")
@@ -53,7 +53,7 @@ export async function getAlertsData() {
 }
 
 export async function getMonitoringData() {
-  const supabase = createServerClient();
+  const supabase = await createServerClient();
 
   const [runs, deadLetters, quality] = await Promise.all([
     supabase.from("mart_pipeline_health").select("*").limit(20),

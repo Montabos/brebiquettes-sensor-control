@@ -1,0 +1,12 @@
+flowchart TB
+    E["Evenement Kafka"] --> V{Validation OK?}
+    V -->|non| DLQ["dead_letter_events\nstatus pending"]
+    V -->|oui| ID{event_id deja vu?}
+    ID -->|oui| SKIP["ignore idempotent"]
+    ID -->|non| INS["insert raw stg fact"]
+    INS --> TH{Hors seuil?}
+    TH -->|oui| AL["fact_quality_alerts"]
+    TH -->|non| OK["ok"]
+    DLQ --> MON["/monitoring\nDLQ visible"]
+    INS --> RUN["pipeline_runs\nrecords_rejected compteur"]
+    DLQ --> RUN

@@ -1,0 +1,28 @@
+erDiagram
+    dim_zone ||--o{ dim_sensor : contient
+    dim_sensor ||--o{ fact_sensor_readings : mesure
+    fact_sensor_readings }o--|| dim_zone : zone
+    dim_sensor ||--o{ fact_quality_alerts : alerte
+    raw_sensor_events ||--|| stg_sensor_readings : event_id
+    stg_sensor_readings ||--|| fact_sensor_readings : event_id
+    pipeline_runs ||--o{ data_quality_results : trace
+    dead_letter_events }o--|| raw_sensor_events : rejet
+
+    dim_zone {
+        uuid zone_id PK
+        text zone_code UK
+        text zone_label
+    }
+    dim_sensor {
+        text sensor_id PK
+        text zone_code FK
+        text metric
+        numeric normal_min
+        numeric normal_max
+    }
+    fact_sensor_readings {
+        text event_id UK
+        text sensor_id FK
+        numeric value
+        timestamptz measured_at
+    }

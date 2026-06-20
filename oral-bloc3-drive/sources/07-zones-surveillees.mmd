@@ -1,0 +1,20 @@
+flowchart TB
+    subgraph froid [Chaine du froid]
+        Z1["FRG_FRAIS\nFrigo produits finis\n2-6 C"]
+        Z2["FRG_AFFINAGE\nCave affinage\n10-14 C"]
+    end
+
+    subgraph sechage [Sechage]
+        Z3["SEC_PLateau\nPlateau sechage\nhumidite 75-85 pct"]
+        Z4["SEC_CAVE\nCave sechage\nhumidite 80-90 pct"]
+    end
+
+    Z1 --> S1["S_FRG_FRAIS_T"]
+    Z1 --> S2["S_FRG_FRAIS_H"]
+    Z2 --> S3["S_FRG_AFF_T"]
+    Z3 --> S4["S_SEC_PLT_H"]
+    Z4 --> S5["S_SEC_CVE_H"]
+    Z4 --> S6["S_SEC_CVE_T"]
+
+    S1 --> AL["fact_quality_alerts\nwatch ou critical"]
+    S3 --> AL

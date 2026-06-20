@@ -33,6 +33,14 @@ export function Nav() {
               </Link>
             ))}
           </nav>
+          <form action="/auth/signout" method="post">
+            <button
+              type="submit"
+              className="rounded-lg px-3 py-2 text-sm font-medium text-stone-500 transition hover:bg-stone-100 hover:text-stone-800"
+            >
+              Déconnexion
+            </button>
+          </form>
         </div>
       </div>
     </header>

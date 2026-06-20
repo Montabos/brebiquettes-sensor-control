@@ -1,0 +1,24 @@
+flowchart TB
+    subgraph ingest [A l ingestion]
+        V1["Schema Pydantic\nschemas.py"]
+        V2["Plages capteur\nsensors.py"]
+        V3["Idempotence event_id"]
+    end
+
+    subgraph runtime [Pendant le run]
+        V4["Freshness\nFRESHNESS_THRESHOLD"]
+        V5["Seuils metier\nnormal_min / max"]
+        V6["DLQ si rejet"]
+    end
+
+    subgraph post [Apres chargement]
+        V7["data_quality_results\nchecks en base"]
+        V8["pytest\ntests/"]
+    end
+
+    V1 --> V4
+    V2 --> V5
+    V3 --> V6
+    V4 --> V7
+    V5 --> V7
+    V7 --> V8

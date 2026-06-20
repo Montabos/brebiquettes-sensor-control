@@ -1,0 +1,19 @@
+flowchart TB
+    subgraph local [Local developpement]
+        RP["Redpanda Docker\nlocalhost:19092"]
+        PROD["producer_sensors.py"]
+        CONS["consumer_to_supabase.py"]
+        CON["Redpanda Console\nlocalhost:8080"]
+        PROD --> RP
+        RP --> CONS
+        CON --- RP
+    end
+
+    subgraph cloud [Cloud production]
+        VER["Next.js sur Vercel\nbrebiquettes-sensor-control"]
+        SB["Supabase PostgreSQL\neu-west-3 Paris"]
+        VER --> SB
+    end
+
+    CONS -->|"service_role HTTPS"| SB
+    VER -->|"anon + auth OAuth"| SB

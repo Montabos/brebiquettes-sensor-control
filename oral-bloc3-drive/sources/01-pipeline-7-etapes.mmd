@@ -1,0 +1,13 @@
+flowchart TB
+    A["1. Capteurs simules\n6 capteurs · 4 zones"]
+    B["2. Producer Python\nproducer_sensors.py"]
+    C["3. Redpanda\n topic sensor_readings"]
+    D["4. Consumer Python\nvalidation · DLQ · idempotence"]
+    E["5. Supabase\nraw → stg → fact → marts"]
+    F["6. Alertes metier\nfact_quality_alerts"]
+    G["7. Dashboard Vercel\n/dashboard · /alertes · /monitoring"]
+
+    A --> B --> C --> D --> E --> G
+    D --> F --> G
+    D --> H["pipeline_runs\ndata_quality_results"]
+    H --> G

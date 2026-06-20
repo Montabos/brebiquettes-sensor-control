@@ -1,0 +1,17 @@
+flowchart LR
+    SRC["Source simulee\nproducer_sensors.py"]
+    RAW["raw_sensor_events\nJSON + offset Kafka"]
+    STG["stg_sensor_readings\nnettoyage"]
+    FACT["fact_sensor_readings\nhistorique"]
+    M1["mart_live_quality_status\nstatut par zone"]
+    M2["mart_recent_readings\ndernieres mesures"]
+    M3["mart_pipeline_health\nsante pipeline"]
+    UI["Dashboard Next.js"]
+
+    SRC --> RAW --> STG --> FACT
+    FACT --> M1
+    FACT --> M2
+    FACT --> M3
+    M1 --> UI
+    M2 --> UI
+    M3 --> UI

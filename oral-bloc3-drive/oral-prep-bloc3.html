@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Antisèche oral — Bloc 3</title>
+  <style>
+    body { font-family: Georgia, "Times New Roman", serif; max-width: 820px; margin: 2rem auto; padding: 0 1.5rem; line-height: 1.55; color: #1c1917; }
+    h1 { font-size: 1.6rem; border-bottom: 2px solid #d6d3d1; padding-bottom: 0.5rem; }
+    h2 { font-size: 1.25rem; margin-top: 2rem; color: #44403c; }
+    h3 { font-size: 1.05rem; margin-top: 1.25rem; }
+    .meta { background: #f5f5f4; padding: 1rem; border-radius: 6px; font-size: 0.95rem; }
+    .ph { color: #1d4ed8; font-weight: 600; }
+    .show { margin: 0.35rem 0 0.35rem 1rem; }
+    table { border-collapse: collapse; width: 100%; font-size: 0.9rem; margin: 1rem 0; }
+    th, td { border: 1px solid #d6d3d1; padding: 0.45rem 0.6rem; text-align: left; }
+    th { background: #fafaf9; }
+    hr { border: none; border-top: 1px solid #e7e5e4; margin: 2rem 0; }
+    .partie { font-size: 1.1rem; font-weight: bold; margin-top: 2.5rem; color: #57534e; }
+  </style>
+</head>
+<body>
+
+<h1>Antisèche oral — Bloc 3 (Surveillance capteurs temps réel)</h1>
+
+<div class="meta">
+  <p><span class="ph">🔗 LIEN → {APP_URL}</span> — https://brebiquettes-sensor-control.vercel.app</p>
+  <p><span class="ph">🔗 LIEN → https://supabase.com/dashboard/project/fpnhabujwtjzjuhfvrgx</span></p>
+  <p><span class="ph">🔗 LIEN → {REDPANDA_CONSOLE}</span> — http://localhost:8080 (démo live)</p>
+  <p><strong>Rappel :</strong> pipeline <strong>streaming</strong> (froid, humidité, affinage). Complète le batch traite du Bloc 2.</p>
+  <p><em>Texte en bleu = placeholder à remplacer par ton lien ou image Google Drive.</em></p>
+</div>
+
+<hr />
+
+<h2>Script oral (10 min)</h2>
+<table>
+  <tr><th>Minute</th><th>Thème</th><th>Action</th></tr>
+  <tr><td>0–1</td><td>0</td><td>Accroche frigo chaud</td></tr>
+  <tr><td>1–2</td><td>1</td><td>Schéma 7 étapes</td></tr>
+  <tr><td>2–4</td><td>2</td><td>Démo dashboard + alertes</td></tr>
+  <tr><td>4–5</td><td>3</td><td>Monitoring</td></tr>
+  <tr><td>5–7</td><td>4</td><td>Live Docker + consumer</td></tr>
+  <tr><td>7–8</td><td>5</td><td>Redpanda vs batch</td></tr>
+  <tr><td>8–9</td><td>6–12</td><td>Limites + RGPD</td></tr>
+  <tr><td>9–10</td><td>Questions</td><td>Pièges</td></tr>
+</table>
+
+<p class="partie">PARTIE 1 — Facile à montrer en live</p>
+
+<h2>Thème 0 — Accroche</h2>
+<p><strong>Grille :</strong> 5.1, 5.2</p>
+<h3>Ce qu'il faut dire</h3>
+<p>Si le frigo lait monte à 9 °C, il faut le savoir <strong>maintenant</strong>, pas demain. Mon pipeline streaming surveille 6 capteurs sur 4 zones et déclenche des alertes en secondes.</p>
+<h3>Montrer</h3>
+<p class="show"><span class="ph">📎 IMAGE → images/01-pipeline-7-etapes.png</span></p>
+
+<hr />
+
+<h2>Thème 1 — Pipeline 7 étapes</h2>
+<p><strong>Grille :</strong> 1.1, 2.1, 2.2, 5.7</p>
+<h3>Ce qu'il faut dire</h3>
+<p>Producer → Redpanda → Consumer (validation, DLQ, idempotence) → Supabase raw/stg/fact → vues mart → dashboard + alertes + monitoring.</p>
+<h3>Montrer</h3>
+<p class="show">1. <span class="ph">📎 IMAGE → images/01-pipeline-7-etapes.png</span></p>
+<p class="show">2. <span class="ph">📎 IMAGE → images/04-lineage-donnees.png</span></p>
+
+<hr />
+
+<h2>Thème 2 — Démo dashboard</h2>
+<p><strong>Grille :</strong> 3.1, 3.3, 5.7</p>
+<h3>Ce qu'il faut dire</h3>
+<p>Fromagerie (statuts zones), Alertes (watch/critical), détail capteur. Auth Google + RLS.</p>
+<h3>Montrer</h3>
+<p class="show">1. <span class="ph">🔗 LIEN → {APP_URL}/login</span></p>
+<p class="show">2. <span class="ph">🔗 LIEN → {APP_URL}/dashboard</span></p>
+<p class="show">3. <span class="ph">🔗 LIEN → {APP_URL}/alertes</span></p>
+<p class="show">4. <span class="ph">📎 IMAGE → images/07-zones-surveillees.png</span></p>
+
+<hr />
+
+<h2>Thème 3 — Monitoring</h2>
+<p><strong>Grille :</strong> 3.1, 3.2, 3.4</p>
+<h3>Ce qu'il faut dire</h3>
+<p>pipeline_runs, DLQ, data_quality_results. Pas d'email — alertes dashboard + Realtime.</p>
+<h3>Montrer</h3>
+<p class="show">1. <span class="ph">🔗 LIEN → {APP_URL}/monitoring</span></p>
+<p class="show">2. <span class="ph">📎 IMAGE → images/08-gestion-erreurs.png</span></p>
+
+<hr />
+
+<h2>Thème 4 — Démo pipeline live</h2>
+<p><strong>Grille :</strong> 2.1, 2.2, 1.3</p>
+<h3>Ce qu'il faut dire</h3>
+<p>docker compose up, consumer + producer Python, Redpanda Console, dashboard qui se met à jour.</p>
+<h3>Montrer</h3>
+<p class="show">1. <span class="ph">🔗 LIEN → {REDPANDA_CONSOLE}</span></p>
+<p class="show">2. <span class="ph">📎 IMAGE → images/03-cycle-evenement.png</span></p>
+
+<p class="partie">PARTIE 2 — Choix techniques</p>
+
+<h2>Thème 5 — Redpanda vs batch Bloc 2</h2>
+<p class="show"><span class="ph">📎 IMAGE → images/10-redpanda-vs-batch.png</span></p>
+
+<h2>Thème 6 — Gestion erreurs + DLQ</h2>
+<p class="show"><span class="ph">📎 IMAGE → images/08-gestion-erreurs.png</span></p>
+
+<h2>Thème 7 — Contrôles qualité</h2>
+<p class="show"><span class="ph">📎 IMAGE → images/05-controles-qualite.png</span></p>
+
+<h2>Thème 8 — Continuité Bloc 1 → 2 → 3</h2>
+<p class="show"><span class="ph">📎 IMAGE → images/09-continuite-blocs.png</span></p>
+
+<h2>Thème 9 — Local vs cloud</h2>
+<p class="show"><span class="ph">📎 IMAGE → images/02-local-vs-cloud.png</span></p>
+
+<p class="partie">PARTIE 3 — Pièges</p>
+
+<h2>Thème 10 — Pas d'email pipeline</h2>
+<p>Alertes métier en base. Resend = extension (Bloc 2).</p>
+
+<h2>Thème 11 — Sécurité et auth</h2>
+<p>Google OAuth, RLS authenticated-only. <span class="ph">🔗 LIEN → {APP_URL}/login</span></p>
+
+<h2>Thème 12 — RGPD</h2>
+<p>Pas de données perso capteurs. Traçabilité raw_sensor_events. eu-west-3.</p>
+
+<h2>Thème 13 — Reprise auto</h2>
+<p>Relance manuelle consumer. DLQ pour rejouer.</p>
+
+<h2>Thème 14 — Pipeline pour l'IA</h2>
+<p>Données qualifiées pour modèles futurs (Bloc 4).</p>
+
+<h2>Thème 15 — Code et tests</h2>
+<p>Python modulaire, pytest, migrations SQL, Next.js.</p>
+
+<h2>Thème 16 — Méta oral</h2>
+<p>10 min, 1 PNG = 1 idée, honnêteté sur limites.</p>
+
+</body>
+</html>

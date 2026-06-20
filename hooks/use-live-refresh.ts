@@ -35,7 +35,9 @@ export function useLiveRefresh<T>(fetcher: () => Promise<T>) {
   }, [fetcher]);
 
   useEffect(() => {
-    load();
+    queueMicrotask(() => {
+      void load();
+    });
 
     const supabase = createBrowserClient();
     const channel = supabase.channel("brebiquettes-pipeline-live");

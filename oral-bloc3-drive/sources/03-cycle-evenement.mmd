@@ -1,0 +1,23 @@
+sequenceDiagram
+    participant P as Producer
+    participant R as Redpanda
+    participant C as Consumer
+    participant S as Supabase
+    participant D as Dashboard
+
+    P->>R: publish event JSON
+    R->>C: poll batch
+    C->>C: validate Pydantic schema
+    alt valide
+        C->>S: insert raw_sensor_events
+        C->>S: upsert stg + fact
+        C->>S: check seuils zone
+        opt hors norme
+            C->>S: insert fact_quality_alerts
+        end
+        C->>S: update pipeline_runs
+        S-->>D: Realtime refresh
+    else invalide
+        C->>S: insert dead_letter_events
+        C->>S: log data_quality_results fail
+    end

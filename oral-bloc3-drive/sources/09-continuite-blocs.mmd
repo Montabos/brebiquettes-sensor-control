@@ -1,0 +1,9 @@
+flowchart LR
+    B1["Bloc 1\nIA fabrication\nqualite fromage"]
+    B2["Bloc 2\nBatch traite\n2x par jour · cron"]
+    B3["Bloc 3\nStreaming capteurs\ntemps reel froid"]
+    B4["Bloc 4\nIA predictive\navenir"]
+
+    B1 -->|"contexte metier"| B2
+    B2 -->|"meme ferme\nautre latence"| B3
+    B3 -->|"donnees qualifiees"| B4

@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { AuthStatus } from "./AuthStatus";
 import { LiveIndicator } from "./LiveIndicator";
 
 const links = [
@@ -11,8 +12,8 @@ const links = [
 export function Nav() {
   return (
     <header className="border-b border-stone-200 bg-white">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4">
-        <div>
+      <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-4 py-4">
+        <div className="min-w-0">
           <p className="text-xs font-medium uppercase tracking-wider text-emerald-700">
             La Ferme des Brebiquettes
           </p>
@@ -20,9 +21,9 @@ export function Nav() {
             Surveillance qualité temps réel
           </h1>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-3">
           <LiveIndicator />
-          <nav className="flex gap-1">
+          <nav className="flex flex-wrap gap-1">
             {links.map((link) => (
               <Link
                 key={link.href}
@@ -33,14 +34,7 @@ export function Nav() {
               </Link>
             ))}
           </nav>
-          <form action="/auth/signout" method="post">
-            <button
-              type="submit"
-              className="rounded-lg px-3 py-2 text-sm font-medium text-stone-500 transition hover:bg-stone-100 hover:text-stone-800"
-            >
-              Déconnexion
-            </button>
-          </form>
+          <AuthStatus />
         </div>
       </div>
     </header>

@@ -1,5 +1,7 @@
 import { Nav } from "@/components/layout/Nav";
 
+export const dynamic = "force-dynamic";
+
 export default function DashboardLayout({
   children,
 }: Readonly<{
